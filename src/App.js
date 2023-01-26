@@ -1,6 +1,8 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { Container, LeftContainer, Divider, RightContainer } from './App.styled';
 
+import MainLeft from './AppComponents/LeftColumn/MainLeft';
+
 function App() {
   const [pageWidth, setPageWidth] = useState(window.innerWidth);
   const [isMouseDown, setIsMouseDown] = useState(false);
@@ -38,7 +40,9 @@ function App() {
 
   return (
     <Container>
-      <LeftContainer style={{ width: `${leftContainerWidth}%` }}></LeftContainer>
+      <LeftContainer style={{ width: `${leftContainerWidth}%` }}>
+        <MainLeft />
+      </LeftContainer>
       <Divider onMouseDown={onMouseDown} onMouseUp={onMouseUp} />
       <RightContainer style={{ width: `${100 - leftContainerWidth}%` }}></RightContainer>
     </Container>
