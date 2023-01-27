@@ -26,4 +26,6 @@ export const LeftBody = styled.div`
   background-color: white;
   width: 100%;
   min-height: 600px;
+  max-height: 1000px;
+  overflow: auto;
 `;

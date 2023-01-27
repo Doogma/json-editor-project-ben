@@ -18,7 +18,8 @@ function MainLeft() {
         </Selector>
       </LeftHeaderBar>
       <LeftBody>
-        <ReactJson src={jsonFile} onEdit={true} onAdd={true} onDelete={true} />
+        {isActive === 'json' && <ReactJson src={jsonFile} onEdit={true} onAdd={true} onDelete={true} />}
+        {isActive === 'input' && <h2>Coming Soon!</h2>}
       </LeftBody>
     </LeftContainer>
   );
