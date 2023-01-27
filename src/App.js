@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { Container, LeftContainer, Divider, RightContainer } from './App.styled';
+import jsonFile from './oreoTest.json';
 
 import MainLeft from './AppComponents/LeftColumn/MainLeft';
 
@@ -8,6 +9,11 @@ function App() {
   const [isMouseDown, setIsMouseDown] = useState(false);
   const [previousX, setPreviousX] = useState();
   const [leftContainerWidth, setLeftContainerWidth] = useState(localStorage.getItem('leftContainerWidth') || 50);
+  const [data, setData] = useState(jsonFile);
+
+  const onChange = (newValue) => {
+    setData(JSON.parse(newValue));
+  };
 
   const onMouseDown = (e) => {
     setPreviousX((pageWidth * leftContainerWidth) / 100);
@@ -41,7 +47,7 @@ function App() {
   return (
     <Container>
       <LeftContainer style={{ width: `${leftContainerWidth}%` }}>
-        <MainLeft />
+        <MainLeft data={data} onChange={onChange} />
       </LeftContainer>
       <Divider onMouseDown={onMouseDown} onMouseUp={onMouseUp} />
       <RightContainer style={{ width: `${100 - leftContainerWidth}%` }}></RightContainer>
