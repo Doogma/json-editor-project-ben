@@ -14,22 +14,8 @@ function MainLeft() {
   const [isActive, setIsActive] = useState('input');
   const [data, setData] = useState(jsonFile);
 
-  console.log(data);
-
   const onChange = (newValue) => {
-    setData(newValue);
-  };
-
-  const formatJSON = (val = {}) => {
-    try {
-      const res = JSON.parse(val);
-      return JSON.stringify(res, null, 2);
-    } catch {
-      const errorJson = {
-        error: `非法返回${val}`,
-      };
-      return JSON.stringify(errorJson, null, 2);
-    }
+    setData(JSON.parse(newValue));
   };
 
   const editorDidMount = (editor, monaco) => {
@@ -51,9 +37,9 @@ function MainLeft() {
         </Selector>
       </LeftHeaderBar>
       <LeftBody>
-        {isActive === 'json' && <AceEditor defaultValue={formatJSON(data)} showPrintMargin={false} minLines={100} mode="json" theme="github" onChange={onChange} name="UNIQUE_ID_OF_DIV" editorProps={{ $blockScrolling: true }} />}
+        {isActive === 'json' && <AceEditor defaultValue={JSON.stringify(data, null, 2)} showPrintMargin={false} minLines={100} mode="json" theme="github" onChange={onChange} name="UNIQUE_ID_OF_DIV" editorProps={{ $blockScrolling: true }} />}
         {isActive === 'input' && <h2>Coming Soon!</h2>}
-        {isActive === 'json2' && <Editor defaultValue={formatJSON(data)} height={'90vh'} defaultLanguage="json" onChange={onChange} />}
+        {isActive === 'json2' && <Editor defaultValue={JSON.stringify(data, null, 2)} height={'90vh'} defaultLanguage="json" onChange={onChange} />}
       </LeftBody>
     </LeftContainer>
   );
