@@ -15,12 +15,10 @@ export const LeftContainer = styled.div`
 
 export const Divider = styled.div`
   cursor: ew-resize;
-  width: 2px;
+  width: 3px;
   background-color: black;
 `;
 
 export const RightContainer = styled.div`
-  background-color: #9ba2ea;
-  height: 500px;
   border-left: 2px solid white;
 `;
