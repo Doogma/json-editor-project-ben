@@ -4,7 +4,7 @@ import StringContainer from './StringContainer';
 
 import { ObjectBox, ObjectHead, ObjectBody } from './MainInputComponents.styled';
 
-function ObjectContainer({ name, value, isArray }) {
+function ObjectContainer({ name, value, isArray, reference, onInputChange }) {
   return (
     <ObjectBox>
       <ObjectHead isArray={isArray}>{name}</ObjectHead>
@@ -14,8 +14,8 @@ function ObjectContainer({ name, value, isArray }) {
             {Object.keys(value).map((key, index) => {
               return (
                 <div key={index}>
-                  {typeof value[key] === 'string' && <StringContainer name={key} value={value[key]} />}
-                  {typeof value[key] === 'object' && <ObjectContainer name={key} value={value[key]} isArray={typeof value[key] === 'object' && value[key] instanceof Array} />}
+                  {typeof value[key] === 'string' && <StringContainer name={key} value={value[key]} reference={reference + '+' + name} onInputChange={onInputChange} />}
+                  {typeof value[key] === 'object' && <ObjectContainer name={key} value={value[key]} isArray={typeof value[key] === 'object' && value[key] instanceof Array} reference={reference + '+' + name} onInputChange={onInputChange} />}
                   {/* {typeof value[key] === 'object' && <>{value[key] instanceof Array ? <ArrayContainer name={key} value={value[key]} /> : <ObjectContainer name={key} value={value[key]} />}</>} */}
                 </div>
               );

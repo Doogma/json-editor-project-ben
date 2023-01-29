@@ -4,11 +4,11 @@ import ObjectContainer from './MainInputComponents/ObjectContainer';
 
 import { MainInputContainer } from './MainInput.styled';
 
-function MainInput({ data }) {
+function MainInput({ data, onInputChange }) {
   return (
     <MainInputContainer>
       {Object.keys(data).map((key, index) => {
-        return <ObjectContainer key={index} name={key} value={data[key]} />;
+        return <ObjectContainer key={index} name={key} value={data[key]} reference={''} onInputChange={onInputChange} />;
       })}
     </MainInputContainer>
   );

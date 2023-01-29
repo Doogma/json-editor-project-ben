@@ -11,8 +11,12 @@ function App() {
   const [leftContainerWidth, setLeftContainerWidth] = useState(localStorage.getItem('leftContainerWidth') || 50);
   const [data, setData] = useState(jsonFile);
 
-  const onChange = (newValue) => {
+  const JSONChangeHandler = (newValue) => {
     setData(JSON.parse(newValue));
+  };
+
+  const INPUTChangeHandler = (e) => {
+    console.log(e.target.name);
   };
 
   const onMouseDown = (e) => {
@@ -47,7 +51,7 @@ function App() {
   return (
     <Container>
       <LeftContainer style={{ width: `${leftContainerWidth}%` }}>
-        <MainLeft data={data} onChange={onChange} />
+        <MainLeft data={data} onEditorChange={JSONChangeHandler} onInputChange={INPUTChangeHandler} />
       </LeftContainer>
       <Divider onMouseDown={onMouseDown} onMouseUp={onMouseUp} />
       <RightContainer style={{ width: `${100 - leftContainerWidth}%` }}></RightContainer>
