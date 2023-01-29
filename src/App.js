@@ -11,12 +11,20 @@ function App() {
   const [leftContainerWidth, setLeftContainerWidth] = useState(localStorage.getItem('leftContainerWidth') || 50);
   const [data, setData] = useState(jsonFile);
 
+  console.log(data);
+
   const JSONChangeHandler = (newValue) => {
     setData(JSON.parse(newValue));
   };
 
   const INPUTChangeHandler = (e) => {
     console.log(e.target.name);
+    let text = e.target.name;
+    let nameArray = text.split('♣');
+    console.log(nameArray);
+    setData((prevData) => {
+      return { ...prevData };
+    });
   };
 
   const onMouseDown = (e) => {
