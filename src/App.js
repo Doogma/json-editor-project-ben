@@ -11,19 +11,31 @@ function App() {
   const [leftContainerWidth, setLeftContainerWidth] = useState(localStorage.getItem('leftContainerWidth') || 50);
   const [data, setData] = useState(jsonFile);
 
-  console.log(data);
-
   const JSONChangeHandler = (newValue) => {
     setData(JSON.parse(newValue));
   };
 
+  const updateObjectState = (state, array, value) => {
+    let newState = { ...state };
+    let currentObject = newState;
+
+    for (let i = 1; i < array.length; i++) {
+      const key = array[i];
+      if (i !== array.length - 1) {
+        currentObject[key] = { ...currentObject[key] };
+        currentObject = currentObject[key];
+      } else {
+        currentObject[key] = value;
+      }
+    }
+    return newState;
+  };
+
   const INPUTChangeHandler = (e) => {
-    console.log(e.target.name);
-    let text = e.target.name;
-    let nameArray = text.split('♣');
-    console.log(nameArray);
+    let nameArray = e.target.name.split('♣');
+
     setData((prevData) => {
-      return { ...prevData };
+      return updateObjectState(prevData, nameArray, e.target.value);
     });
   };
 

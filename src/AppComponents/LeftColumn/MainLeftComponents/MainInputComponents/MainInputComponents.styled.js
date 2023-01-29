@@ -6,7 +6,7 @@ export const ObjectBox = styled.div`
 
 export const ObjectHead = styled.div`
   background-color: ${(props) => (props.isArray ? '#9ec2a6' : '#72b9be')};
-  padding: 3px 10px;
+  padding: 6px 10px;
 `;
 
 export const ObjectBody = styled.div`
@@ -20,16 +20,36 @@ export const StringBox = styled.div`
 `;
 
 export const StringName = styled.div`
-  background-color: #f8aa97;
+  background-color: ${(props) => (props.isEdit ? '#f83333' : '#f8aa97')};
   display: flex;
-  padding: 5px 10px;
+  padding: 6px 10px;
   min-width: 200px;
   justify-content: end;
-  font-size: 14px;
+  font-size: 1rem;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 `;
 
-export const StringValue = styled.input`
-  padding: 5px;
+export const StringValue = styled.div`
+  padding: 6px;
   border: 1px solid #f8aa97;
   width: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+`;
+
+export const StringInput = styled.input`
+  padding: 6px;
+  border: 1px solid #f83333;
+  width: 100%;
+  font-size: 1rem;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+`;
+
+export const Actions = styled.div`
+  padding: 5px 10px;
+  margin-left: 3px;
+  text-align: center;
+  border: 1px solid #f8aa97;
+  width: 30px;
+  background-color: ${(props) => (props.isEdit ? '#f83333' : '#f8aa97')};
+  cursor: pointer;
 `;
