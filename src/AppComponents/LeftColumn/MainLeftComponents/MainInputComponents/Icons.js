@@ -1,6 +1,6 @@
 import styled from 'styled-components/macro';
 
-import { RiEdit2Line, RiDeleteBin4Line, RiCheckFill, RiSaveLine } from 'react-icons/ri';
+import { RiEdit2Line, RiDeleteBin4Line, RiCheckFill, RiSaveLine, RiPlayListAddFill } from 'react-icons/ri';
 
 export const IconsContainer = styled.div`
   display: flex;
@@ -43,7 +43,7 @@ export const DeleteIcon = () => {
 
 export const CheckIcon = () => {
   return (
-    <IconContainer isWhite={false}>
+    <IconContainer>
       <RiCheckFill />
     </IconContainer>
   );
@@ -51,8 +51,16 @@ export const CheckIcon = () => {
 
 export const SaveIcon = () => {
   return (
-    <IconContainer isWhite={false}>
+    <IconContainer>
       <RiSaveLine />
     </IconContainer>
   );
 };
+
+export function AddData() {
+  return (
+    <IconContainer>
+      <RiPlayListAddFill />
+    </IconContainer>
+  );
+}

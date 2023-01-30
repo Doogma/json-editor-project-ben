@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import StringContainer from './StringContainer';
 
 import { ObjectBox, ObjectHead, ObjectHeadText, ObjectBody } from './MainInputComponents.styled';
-import { IconsContainer, DeleteIcon } from './Icons';
+import { IconsContainer, DeleteIcon, AddData } from './Icons';
 
 function ObjectContainer({ name, value, isArray, reference, onInputChange, onInputDelete }) {
+  const [isAdd, setIsAdd] = useState(false);
+
   return (
     <ObjectBox>
       <ObjectHead isArray={isArray}>
@@ -13,6 +15,9 @@ function ObjectContainer({ name, value, isArray, reference, onInputChange, onInp
         <IconsContainer>
           <div onClick={() => onInputDelete(reference + '♣' + name)}>
             <DeleteIcon />
+          </div>
+          <div onClick={() => setIsAdd(true)}>
+            <AddData />
           </div>
         </IconsContainer>
       </ObjectHead>
@@ -29,6 +34,7 @@ function ObjectContainer({ name, value, isArray, reference, onInputChange, onInp
                 </div>
               );
             })}
+            {isAdd && <StringContainer name={'I am goot!'} value={'I am not groot'} />}
           </>
         )}
         {typeof value === 'string' && <StringContainer name={name} value={value} onInputDelete={onInputDelete} />}
