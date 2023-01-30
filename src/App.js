@@ -31,6 +31,24 @@ function App() {
     return newState;
   };
 
+  const InputDeleteHandler = (path) => {
+    let array = path.split('♣');
+    console.log(array);
+    let newData = { ...data };
+    let currentObject = newData;
+
+    for (let i = 1; i < array.length; i++) {
+      const key = array[i];
+      if (i !== array.length - 1) {
+        currentObject[key] = { ...currentObject[key] };
+        currentObject = currentObject[key];
+      } else {
+        delete currentObject[key];
+      }
+    }
+    setData(newData);
+  };
+
   const INPUTChangeHandler = (e) => {
     let nameArray = e.target.name.split('♣');
 
@@ -71,7 +89,7 @@ function App() {
   return (
     <Container>
       <LeftContainer style={{ width: `${leftContainerWidth}%` }}>
-        <MainLeft data={data} onEditorChange={JSONChangeHandler} onInputChange={INPUTChangeHandler} />
+        <MainLeft data={data} onEditorChange={JSONChangeHandler} onInputChange={INPUTChangeHandler} onInputDelete={InputDeleteHandler} />
       </LeftContainer>
       <Divider onMouseDown={onMouseDown} onMouseUp={onMouseUp} />
       <RightContainer style={{ width: `${100 - leftContainerWidth}%` }}></RightContainer>

@@ -1,22 +1,30 @@
 import React, { useState } from 'react';
 
-import { StringBox, StringName, StringValue, StringInput, Actions } from './MainInputComponents.styled';
-import { FaEdit } from 'react-icons/fa';
+import { StringBox, StringName, StringValue, StringInput } from './MainInputComponents.styled';
+import { IconsContainer, EditIcon, DeleteIcon, CheckIcon } from './Icons';
 
-function StringContainer({ name, value, reference, onInputChange }) {
+function StringContainer({ name, value, reference, onInputChange, onInputDelete }) {
   const [isEdit, setIsEdit] = useState(false);
 
-  const enableEditHandler = () => {
-    setIsEdit((prev) => !prev);
-  };
   return (
     <StringBox>
       <StringName isEdit={isEdit}>{name}:</StringName>
       {isEdit ? <StringInput type="text" defaultValue={value} name={reference + '♣' + name} onChange={onInputChange} /> : <StringValue>{value}</StringValue>}
 
-      <Actions onClick={enableEditHandler} isEdit={isEdit}>
-        <FaEdit />
-      </Actions>
+      <IconsContainer>
+        {isEdit ? (
+          <div onClick={() => setIsEdit(false)}>
+            <CheckIcon />
+          </div>
+        ) : (
+          <div onClick={() => setIsEdit(true)}>
+            <EditIcon />
+          </div>
+        )}
+        <div onClick={() => onInputDelete(reference + '♣' + name)}>
+          <DeleteIcon />
+        </div>
+      </IconsContainer>
     </StringBox>
   );
 }

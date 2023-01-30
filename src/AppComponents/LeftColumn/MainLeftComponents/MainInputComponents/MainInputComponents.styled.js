@@ -7,6 +7,12 @@ export const ObjectBox = styled.div`
 export const ObjectHead = styled.div`
   background-color: ${(props) => (props.isArray ? '#9ec2a6' : '#72b9be')};
   padding: 6px 10px;
+  display: flex;
+  justify-content: space-between;
+`;
+
+export const ObjectHeadText = styled.div`
+  padding: 6px 10px;
 `;
 
 export const ObjectBody = styled.div`
@@ -49,7 +55,7 @@ export const Actions = styled.div`
   margin-left: 3px;
   text-align: center;
   border: 1px solid #f8aa97;
-  width: 30px;
+  width: 80px;
   background-color: ${(props) => (props.isEdit ? '#f83333' : '#f8aa97')};
   cursor: pointer;
 `;
