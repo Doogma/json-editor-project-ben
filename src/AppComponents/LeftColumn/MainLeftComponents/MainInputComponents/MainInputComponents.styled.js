@@ -1,7 +1,8 @@
 import styled from 'styled-components/macro';
 
 export const ObjectBox = styled.div`
-  border: 1px solid #72b9be;
+  border: 1px solid ${(props) => (props.isArray ? '#9ec2a6' : '#72b9be')};
+  border-left: 3px solid ${(props) => (props.isArray ? '#9ec2a6' : '#72b9be')};
 `;
 
 export const ObjectHead = styled.div`
@@ -18,6 +19,7 @@ export const ObjectHeadText = styled.div`
 export const ObjectBody = styled.div`
   padding: 3px;
   min-height: 10px;
+  padding-left: 5px;
 `;
 
 export const StringBox = styled.div`

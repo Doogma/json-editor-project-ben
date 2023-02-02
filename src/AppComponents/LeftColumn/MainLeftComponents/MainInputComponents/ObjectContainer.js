@@ -19,7 +19,7 @@ function ObjectContainer({ name, value, isArray, reference, onInputDelete, onInp
   };
 
   return (
-    <ObjectBox>
+    <ObjectBox isArray={isArray}>
       <ObjectHead isArray={isArray}>
         <ObjectHeadText>{name}</ObjectHeadText>
         <IconsContainer>
