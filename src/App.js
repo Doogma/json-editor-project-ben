@@ -15,25 +15,30 @@ function App() {
     setData(JSON.parse(newValue));
   };
 
-  const updateObjectState = (state, array, value) => {
-    let newState = { ...state };
-    let currentObject = newState;
+  const INPUTSaveHandler = (payload) => {
+    const updateObjectState = (state, array, value) => {
+      let newState = { ...state };
+      let currentObject = newState;
 
-    for (let i = 1; i < array.length; i++) {
-      const key = array[i];
-      if (i !== array.length - 1) {
-        currentObject[key] = { ...currentObject[key] };
-        currentObject = currentObject[key];
-      } else {
-        currentObject[key] = value;
+      for (let i = 1; i < array.length; i++) {
+        const key = array[i];
+        if (i !== array.length - 1) {
+          currentObject[key] = { ...currentObject[key] };
+          currentObject = currentObject[key];
+        } else {
+          currentObject[key] = value;
+        }
       }
-    }
-    return newState;
+      return newState;
+    };
+
+    setData((prevData) => {
+      return updateObjectState(prevData, payload.nameArray, payload.value);
+    });
   };
 
-  const InputDeleteHandler = (path) => {
+  const INPUTDeleteHandler = (path) => {
     let array = path.split('♣');
-    console.log(array);
     let newData = { ...data };
     let currentObject = newData;
 
@@ -49,13 +54,11 @@ function App() {
     setData(newData);
   };
 
-  const INPUTChangeHandler = (e) => {
-    let nameArray = e.target.name.split('♣');
-
-    setData((prevData) => {
-      return updateObjectState(prevData, nameArray, e.target.value);
-    });
+  const INPUTAddHandler = (payload) => {
+    console.log(payload);
   };
+
+  // Draggable divider starts here
 
   const onMouseDown = (e) => {
     setPreviousX((pageWidth * leftContainerWidth) / 100);
@@ -86,10 +89,12 @@ function App() {
     };
   }, [onMouseMove, onMouseUp]);
 
+  // JSX starts here
+
   return (
     <Container>
       <LeftContainer style={{ width: `${leftContainerWidth}%` }}>
-        <MainLeft data={data} onEditorChange={JSONChangeHandler} onInputChange={INPUTChangeHandler} onInputDelete={InputDeleteHandler} />
+        <MainLeft data={data} onEditorChange={JSONChangeHandler} onInputDelete={INPUTDeleteHandler} onInputSave={INPUTSaveHandler} onInputAdd={INPUTAddHandler} />
       </LeftContainer>
       <Divider onMouseDown={onMouseDown} onMouseUp={onMouseUp} />
       <RightContainer style={{ width: `${100 - leftContainerWidth}%` }}></RightContainer>

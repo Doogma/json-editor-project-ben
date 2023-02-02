@@ -5,7 +5,7 @@ import { LeftContainer, LeftHeaderBar, Selector, LeftBody } from './MainLeft.sty
 
 import MainInput from './MainLeftComponents/MainInput';
 
-function MainLeft({ data, onEditorChange, onInputChange, onInputDelete }) {
+function MainLeft({ data, onEditorChange, onInputDelete, onInputSave, onInputAdd }) {
   const [isActive, setIsActive] = useState('input');
 
   return (
@@ -19,7 +19,7 @@ function MainLeft({ data, onEditorChange, onInputChange, onInputDelete }) {
         </Selector>
       </LeftHeaderBar>
       <LeftBody>
-        {isActive === 'input' && <MainInput data={data} onInputChange={onInputChange} onInputDelete={onInputDelete} />}
+        {isActive === 'input' && <MainInput data={data} onInputDelete={onInputDelete} onInputSave={onInputSave} onInputAdd={onInputAdd} />}
         {isActive === 'json' && <Editor defaultValue={JSON.stringify(data, null, 2)} height={'90vh'} defaultLanguage="json" onChange={onEditorChange} options={{ minimap: { enabled: false } }} />}
       </LeftBody>
     </LeftContainer>

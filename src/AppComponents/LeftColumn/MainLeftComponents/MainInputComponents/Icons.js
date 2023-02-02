@@ -1,6 +1,7 @@
 import styled from 'styled-components/macro';
 
 import { RiEdit2Line, RiDeleteBin4Line, RiCheckFill, RiSaveLine, RiPlayListAddFill } from 'react-icons/ri';
+import { MdOutlineCancel } from 'react-icons/md';
 
 export const IconsContainer = styled.div`
   display: flex;
@@ -64,3 +65,11 @@ export function AddData() {
     </IconContainer>
   );
 }
+
+export const CancelIcon = () => {
+  return (
+    <IconContainer>
+      <MdOutlineCancel />
+    </IconContainer>
+  );
+};
