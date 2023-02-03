@@ -17,9 +17,9 @@ const SelectModal = ({ closeModal, type, onSelect }) => {
         </>
       )}
       <ModalHeader>Click to Add Item of Type</ModalHeader>
-      <SelectOptions onClick={() => onSelect('OBJECT', itemName)}>Object</SelectOptions>
-      <SelectOptions onClick={() => onSelect('ARRAY', itemName)}>Array</SelectOptions>
-      <SelectOptions onClick={() => onSelect('STRING', itemName)}>String</SelectOptions>
+      <SelectOptions onClick={() => (itemName || type === 'ARRAY' ? onSelect('OBJECT', itemName) : window.alert('Please enter an item name'))}>Object</SelectOptions>
+      <SelectOptions onClick={() => (itemName || type === 'ARRAY' ? onSelect('ARRAY', itemName) : window.alert('Please enter an item name'))}>Array</SelectOptions>
+      <SelectOptions onClick={() => (itemName || type === 'ARRAY' ? onSelect('STRING', itemName) : window.alert('Please enter an item name'))}>String</SelectOptions>
     </Modal>
   );
 };

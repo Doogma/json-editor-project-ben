@@ -56,6 +56,38 @@ function App() {
 
   const INPUTAddHandler = (payload) => {
     console.log(payload);
+    let newData = { ...data };
+    let currentObject = newData;
+
+    let array = payload.path;
+
+    for (let i = 1; i < array.length; i++) {
+      const key = array[i];
+      if (i !== array.length - 1) {
+        currentObject[key] = { ...currentObject[key] };
+        currentObject = currentObject[key];
+      } else {
+        if (payload.type === 'OBJECT' && payload.newItemType === 'STRING') {
+          currentObject[payload.name] = payload.value;
+        }
+        if (payload.type === 'OBJECT' && payload.newItemType === 'OBJECT') {
+          currentObject[payload.name] = {};
+        }
+        if (payload.type === 'OBJECT' && payload.newItemType === 'ARRAY') {
+          currentObject[payload.name] = [];
+        }
+        if (payload.type === 'ARRAY' && payload.newItemType === 'STRING') {
+          currentObject = [...currentObject, payload.value];
+        }
+        if (payload.type === 'ARRAY' && payload.newItemType === 'OBJECT') {
+          currentObject = [...currentObject, {}];
+        }
+        if (payload.type === 'ARRAY' && payload.newItemType === 'ARRAY') {
+          currentObject = [...currentObject, []];
+        }
+      }
+    }
+    setData(newData);
   };
 
   // Draggable divider starts here

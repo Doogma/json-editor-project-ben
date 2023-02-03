@@ -1,15 +1,36 @@
 import React, { useEffect, useState } from 'react';
+import { StringActionIcons } from './ActionIcons';
 
 import { StringBox, StringName, StringValue, StringInput } from './StringContainer.styled';
-import { IconsContainer, EditIcon, DeleteIcon, CheckIcon, CancelIcon } from '../../../../assets/Icons';
 
-function StringContainer({ name, value, reference, onInputDelete, onInputSave, isNew, onCancel, onInputAdd }) {
+function StringContainer({ name, value, reference, onInputDelete, onInputSave, isNew, onCancel, onInputAdd, inputComponent }) {
   const [isEdit, setIsEdit] = useState(false);
   const [payload, setPayload] = useState({});
 
   const onChangeHandler = (e) => {
     let nameArray = e.target.name.split('♣');
     setPayload({ nameArray, value: e.target.value });
+  };
+
+  const onSaveHandler = () => {
+    setIsEdit(false);
+    isEdit && onInputSave(payload);
+    isNew && onInputAdd(payload.value, payload.nameArray);
+  };
+
+  const onCancelHandler = () => {
+    setIsEdit(false);
+    onCancel();
+  };
+
+  const onEditHandler = () => {
+    setIsEdit(true);
+  };
+
+  const onDeleteHandler = () => {
+    if (window.confirm('Are you sure you want to delete this entry?') === true) {
+      onInputDelete(reference + '♣' + name);
+    }
   };
 
   useEffect(() => {
@@ -21,42 +42,8 @@ function StringContainer({ name, value, reference, onInputDelete, onInputSave, i
   return (
     <StringBox>
       <StringName isEdit={isEdit || isNew}>{name}:</StringName>
-      {isEdit || isNew ? <StringInput type="text" defaultValue={value} name={reference + '♣' + name} onChange={onChangeHandler} /> : <StringValue>{value}</StringValue>}
-
-      <IconsContainer>
-        {isEdit || isNew ? (
-          <>
-            <div
-              title={'save'}
-              onClick={() => {
-                setIsEdit(false);
-                onInputSave(payload);
-                isNew && onInputAdd(payload.value);
-              }}
-            >
-              <CheckIcon />
-            </div>
-            <div
-              title={'cancel'}
-              onClick={() => {
-                setIsEdit(false);
-                onCancel();
-              }}
-            >
-              <CancelIcon />
-            </div>
-          </>
-        ) : (
-          <>
-            <div title={'edit'} onClick={() => setIsEdit(true)}>
-              <EditIcon />
-            </div>
-            <div title={'delete'} onClick={() => onInputDelete(reference + '♣' + name)}>
-              <DeleteIcon />
-            </div>
-          </>
-        )}
-      </IconsContainer>
+      {isEdit || isNew ? <StringInput type="text" defaultValue={value} name={reference + '♣' + name} onChange={onChangeHandler} ref={inputComponent} /> : <StringValue>{value}</StringValue>}
+      <StringActionIcons onSave={onSaveHandler} onCancel={onCancelHandler} onEdit={onEditHandler} onDelete={onDeleteHandler} isNew={isNew} isEdit={isEdit} />
     </StringBox>
   );
 }
