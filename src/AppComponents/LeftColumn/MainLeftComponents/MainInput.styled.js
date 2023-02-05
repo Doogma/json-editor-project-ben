@@ -8,3 +8,18 @@ export const MainInputContainer = styled.div`
   padding: 3px;
   flex-direction: column;
 `;
+
+export const FloatingIconContainer = styled.div`
+  display: flex;
+  padding: 5px;
+  margin: 5px;
+  flex-direction: row;
+  border: 1px solid green;
+  width: 150px;
+  background-color: #7ed07e;
+  border-radius: 3px;
+
+  & span {
+    padding: 4px;
+  }
+`;

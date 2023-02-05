@@ -7,11 +7,11 @@ export const ObjectActionIcons = ({ onDelete, onAdd, isAdd }) => {
     <IconsContainer>
       {!isAdd && (
         <>
-          <div title={'delete'} onClick={onDelete}>
-            <DeleteIcon />
-          </div>
           <div title={'add'} onClick={onAdd}>
             <AddData />
+          </div>
+          <div title={'delete'} onClick={onDelete}>
+            <DeleteIcon />
           </div>
         </>
       )}

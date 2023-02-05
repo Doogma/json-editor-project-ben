@@ -12,7 +12,7 @@ const SelectModal = ({ closeModal, type, onSelect }) => {
           <ModalHeader>Give new Item a Name</ModalHeader>
           <InputContainer>
             <InputName>Item Name</InputName>
-            <InputField onChange={(e) => setItemName(e.target.value)} />
+            <InputField onChange={(e) => setItemName(e.target.value)} autoFocus />
           </InputContainer>
         </>
       )}

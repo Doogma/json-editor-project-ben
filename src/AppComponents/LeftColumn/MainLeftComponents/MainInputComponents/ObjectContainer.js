@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 
 import StringContainer from './StringContainer';
 import SelectModal from './ObjectContainerComponents/SelectModal';
@@ -9,16 +9,15 @@ import { ObjectBox, ObjectHead, ObjectHeadText, ObjectBody } from './ObjectConta
 function ObjectContainer({ name, value, isArray, reference, onInputDelete, onInputSave, onInputAdd, onCancel }) {
   const [isAdd, setIsAdd] = useState(false);
   const [type, setType] = useState('');
-  const [newInputName, setNewInputName] = useState('New Input Name');
-  const [newInputValue, setNewInputValue] = useState('Add New Input Value');
+  const [newInputName, setNewInputName] = useState('');
+  const [newInputValue, setNewInputValue] = useState('');
   const [newItemType, setNewItemType] = useState('STRING');
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const inputComponent = useRef();
 
   const onSaveNewHandler = (value, path) => {
     onInputAdd({ type, name: newInputName, value: value, newItemType, path });
     setIsAdd(false);
-    setNewInputValue('Add New Input Value');
+    setNewInputValue('');
   };
 
   const onSelectHandler = (itemType, itemName) => {
@@ -33,8 +32,6 @@ function ObjectContainer({ name, value, isArray, reference, onInputDelete, onInp
       onInputAdd({ type, name: itemName, newItemType: itemType, path });
     }
     setModalIsOpen(false);
-    console.log(inputComponent);
-    //inputComponent.current.focus();
   };
 
   const onCancelHandler = () => {
@@ -86,11 +83,10 @@ function ObjectContainer({ name, value, isArray, reference, onInputDelete, onInp
                 </div>
               );
             })}
-            {/* {isAdd && newItemType === 'OBJECT' && <StringContainer name={newInputName} value={newInputValue} isNew={true} onInputAdd={onSaveNewHandler} onCancel={onCancelHandler} reference={reference + '♣' + name} />} */}
           </>
         )}
         {typeof value === 'string' && <StringContainer name={name} value={value} onInputDelete={onInputDelete} onInputSave={onInputSave} />}
-        {isAdd && newItemType === 'STRING' && <StringContainer name={newInputName} value={newInputValue} isNew={true} onCancel={onCancelHandler} onInputAdd={onSaveNewHandler} reference={reference + '♣' + name} inputComponent={inputComponent} />}
+        {isAdd && newItemType === 'STRING' && <StringContainer name={newInputName} value={newInputValue} isNew={true} onCancel={onCancelHandler} onInputAdd={onSaveNewHandler} reference={reference + '♣' + name} />}
       </ObjectBody>
     </ObjectBox>
   );

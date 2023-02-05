@@ -4,90 +4,30 @@ import jsonFile from './oreoTest.json';
 
 import MainLeft from './AppComponents/LeftColumn/MainLeft';
 
+import { handleSaveFunction, handleDeleteFunction, handleAddFunction } from './AppFunctions';
+
 function App() {
   const [pageWidth, setPageWidth] = useState(window.innerWidth);
   const [isMouseDown, setIsMouseDown] = useState(false);
   const [previousX, setPreviousX] = useState();
   const [leftContainerWidth, setLeftContainerWidth] = useState(localStorage.getItem('leftContainerWidth') || 50);
-  const [data, setData] = useState(jsonFile);
+  const [data, setData] = useState({});
 
   const JSONChangeHandler = (newValue) => {
     setData(JSON.parse(newValue));
   };
 
   const INPUTSaveHandler = (payload) => {
-    const updateObjectState = (state, array, value) => {
-      let newState = { ...state };
-      let currentObject = newState;
-
-      for (let i = 1; i < array.length; i++) {
-        const key = array[i];
-        if (i !== array.length - 1) {
-          currentObject[key] = { ...currentObject[key] };
-          currentObject = currentObject[key];
-        } else {
-          currentObject[key] = value;
-        }
-      }
-      return newState;
-    };
-
-    setData((prevData) => {
-      return updateObjectState(prevData, payload.nameArray, payload.value);
-    });
+    setData((prevData) => handleSaveFunction(prevData, payload.nameArray, payload.value));
   };
 
-  const INPUTDeleteHandler = (path) => {
-    let array = path.split('♣');
-    let newData = { ...data };
-    let currentObject = newData;
-
-    for (let i = 1; i < array.length; i++) {
-      const key = array[i];
-      if (i !== array.length - 1) {
-        currentObject[key] = { ...currentObject[key] };
-        currentObject = currentObject[key];
-      } else {
-        delete currentObject[key];
-      }
-    }
-    setData(newData);
+  const INPUTDeleteHandler = (payload) => {
+    let array = payload.split('♣');
+    setData((prevData) => handleDeleteFunction(prevData, array));
   };
 
   const INPUTAddHandler = (payload) => {
-    console.log(payload);
-    let newData = { ...data };
-    let currentObject = newData;
-
-    let array = payload.path;
-
-    for (let i = 1; i < array.length; i++) {
-      const key = array[i];
-      if (i !== array.length - 1) {
-        currentObject[key] = { ...currentObject[key] };
-        currentObject = currentObject[key];
-      } else {
-        if (payload.type === 'OBJECT' && payload.newItemType === 'STRING') {
-          currentObject[payload.name] = payload.value;
-        }
-        if (payload.type === 'OBJECT' && payload.newItemType === 'OBJECT') {
-          currentObject[payload.name] = {};
-        }
-        if (payload.type === 'OBJECT' && payload.newItemType === 'ARRAY') {
-          currentObject[payload.name] = [];
-        }
-        if (payload.type === 'ARRAY' && payload.newItemType === 'STRING') {
-          currentObject = [...currentObject, payload.value];
-        }
-        if (payload.type === 'ARRAY' && payload.newItemType === 'OBJECT') {
-          currentObject = [...currentObject, {}];
-        }
-        if (payload.type === 'ARRAY' && payload.newItemType === 'ARRAY') {
-          currentObject = [...currentObject, []];
-        }
-      }
-    }
-    setData(newData);
+    setData((prevData) => handleAddFunction(prevData, payload));
   };
 
   // Draggable divider starts here

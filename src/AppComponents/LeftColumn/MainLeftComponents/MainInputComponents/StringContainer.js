@@ -3,7 +3,7 @@ import { StringActionIcons } from './ActionIcons';
 
 import { StringBox, StringName, StringValue, StringInput } from './StringContainer.styled';
 
-function StringContainer({ name, value, reference, onInputDelete, onInputSave, isNew, onCancel, onInputAdd, inputComponent }) {
+function StringContainer({ name, value, reference, onInputDelete, onInputSave, isNew, onCancel, onInputAdd }) {
   const [isEdit, setIsEdit] = useState(false);
   const [payload, setPayload] = useState({});
 
@@ -42,7 +42,7 @@ function StringContainer({ name, value, reference, onInputDelete, onInputSave, i
   return (
     <StringBox>
       <StringName isEdit={isEdit || isNew}>{name}:</StringName>
-      {isEdit || isNew ? <StringInput type="text" defaultValue={value} name={reference + '♣' + name} onChange={onChangeHandler} ref={inputComponent} /> : <StringValue>{value}</StringValue>}
+      {isEdit || isNew ? <StringInput type="text" defaultValue={value} name={reference + '♣' + name} onChange={onChangeHandler} autoFocus placeholder="Enter New Value" /> : <StringValue>{value}</StringValue>}
       <StringActionIcons onSave={onSaveHandler} onCancel={onCancelHandler} onEdit={onEditHandler} onDelete={onDeleteHandler} isNew={isNew} isEdit={isEdit} />
     </StringBox>
   );
