@@ -11,7 +11,7 @@ function App() {
   const [isMouseDown, setIsMouseDown] = useState(false);
   const [previousX, setPreviousX] = useState();
   const [leftContainerWidth, setLeftContainerWidth] = useState(localStorage.getItem('leftContainerWidth') || 50);
-  const [data, setData] = useState({});
+  const [data, setData] = useState(jsonFile);
 
   const JSONChangeHandler = (newValue) => {
     setData(JSON.parse(newValue));
